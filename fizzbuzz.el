@@ -1,13 +1,3 @@
-;; Define function to create the list from 1 to 100
-(defun make-list (start end)
-  (progn
-    (nconc 
-     (if (= start end)
-	 (cons start nil)
-       (cons start (make-list (1+ start) end))))))
-
-
-;; Define fizzbuzz function
 (defun fizzbuzz (list)
   (while list
     (let ((num (pop list)))
@@ -20,6 +10,4 @@
 
 
 ;; Call fizzbuzz on created list
-(fizzbuzz (make-list 1 100))
-
-
+(fizzbuzz (number-sequence 1 100))
