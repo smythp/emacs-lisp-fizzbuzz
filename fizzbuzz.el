@@ -1,13 +1,18 @@
-(defun fizzbuzz (list)
-  (while list
-    (let ((num (pop list)))
-      (progn
-      (cond ((and (= 0 (% num 3)) (= 0 (% num 5)) (princ 'fizzbuzz)))
-	    ((= 0 (% num 3)) (princ 'fizz))
-	    ((= 0 (% num 5)) (princ 'buzz))
-	    (t (princ num)))
-      (princ "\n")))))
+(defun divisible-by-p (number divisor)
+  (if (= (% number divisor) 0)
+      t))
 
 
-;; Call fizzbuzz on created list
-(fizzbuzz (number-sequence 1 100))
+(defun fizzbuzz-chooser (number)
+  (cond ((divisible-by-p number 15) "fizzbuzz")
+	((divisible-by-p number 3) "fizz")
+	((divisible-by-p number 5) "buzz")
+	(t (number-to-string number))))
+
+
+(defun fizzbuzz-list-gen (start end)
+  (if (< start end)
+    (cons (fizzbuzz-chooser start) (fizzbuzz-list-gen (1+ start) end))))
+
+
+(mapcar #'(lambda (x) (princ (concat x "\n"))) (fizzbuzz-list-gen 1 100))
